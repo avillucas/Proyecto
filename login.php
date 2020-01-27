@@ -1,20 +1,22 @@
 <?php
-$cons_usuario = "root";
-$cons_contra = "";
-$cons_base_datos = "test"; //nombrde de cada uno
-$cons_equipo = "localhost";
+$cons_usuario = "default";
+$cons_contra = "secret";
+$cons_base_datos = "default"; //nombrde de cada uno
+$cons_equipo = "mysql";
 
 $obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
 
 $msg = "";
 if (!$obj_conexion){
     echo "<h3>No se ha podido conectar PHP - MySQL, verifique sus datos.</h3><hr><br>";
+        echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
+        //echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
 } else {
     $user = isset($_REQUEST['user']) ? $_REQUEST['user'] : NULL;
     $pass = isset($_REQUEST['pass']) ? $_REQUEST['pass'] : NULL;
-    
+
     if (!is_null($user) && !is_null($pass)) {
-            $sql = "SELECT * FROM test.users WHERE user_name = '".mysqli_real_escape_string('$user')."' AND password = '".mysqli_real_escape_string('$pass')."'";        
+            $sql = "SELECT * FROM ".$cons_base_datos.".users WHERE user_name = '".mysqli_real_escape_string($obj_conexion,$user)."' AND password = '".mysqli_real_escape_string($obj_conexion,$pass)."'";
             if ($select = mysqli_query($obj_conexion, $sql)) {
             $msg = "Hay datos... leer los datos";
         } else {
