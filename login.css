@@ -1,0 +1,18 @@
+body {
+    background-color: #FFFFFF;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.log {
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    margin: 45px 15px 15px 15px;
+    padding: 15px 15px 15px 15px;
+    background-color: rgba(96, 139, 168, .2);
+}
